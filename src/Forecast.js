@@ -1,36 +1,43 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import "./Forecast.css";
-import Period from "./Period";
-import CitySearch from "./CitySearch";
+import CurrentWeather from "./CurrentWeather";
+// import Period from "./Period";
+// import CitySearch from "./CitySearch";
+// import Input from "./Input";
 
-class WeatherSystem extends Component {
+class Forecast extends Component {
     state = {
-        periods: [] ,
+        value: 'Paris',
+        city: '',
      }
 
-    componentDidMount() {
-        axios.get('https://api.openweathermap.org/data/2.5/forecast?q=Paris&lang=fr&units=metric&appid=8c3a54c385c9c9d874d88f2cd6b3dda8')
-        .then(res => {
-            console.log(res.data);
-            this.setState({
-                periods: res.data.list,
-            })
-        })
+     handleChange = (e) => {
+        this.setState({
+          value: e.target.value,
+        });
+      };
+    
+      handleClick = () => {
+          this.setState({
+              city: this.state.value,
+          })
+      }
+    
+      render() {
+        let city = this.state.city;
+        return (
+          <div className="input">
+            <input
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.value}
+            />
+            <button onClick={this.handleClick}>Valider</button>
+            <CurrentWeather city={city} />
+          </div>
+        );
+      }
     }
-
-    render() { 
-        let periodsList = this.state.periods.map(period => {
-            return <Period period={period} />
-        })
-
-        return ( 
-            <div className="weathersystem">
-                <CitySearch city={this.state.city}/>
-                {periodsList}
-            </div>
-         );
-    }
-}
- 
-export default WeatherSystem;
+    
+    export default Forecast;
