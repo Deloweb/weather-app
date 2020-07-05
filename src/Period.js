@@ -1,30 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "./Period.css";
 
 class Period extends Component {
-    state = { 
-        period: []
-     }
+  state = {
+    days: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Satruday",
+    ],
+  };
 
-  currentDay = () => {
-    this.setState({
-        periods: [this.props.period.filter(this.props.peio)]
-    })
+  render() {
+    let period = this.props.forecast;
+    let iconURL = `http://openweathermap.org/img/wn/${period.weather[0].icon}@2x.png`;
+    return (
+      <div className="period">
+        <p className="period__d">
+          {this.state.days[new Date(period.dt_txt).getDay()]}
+        </p>
+        <img src={iconURL} className="period__img" alt="" />
+        <p className="period__temp">{Math.round(period.main.temp*10)/10}°C</p>
+      </div>
+    );
+  }
 }
 
-    render() { 
-        let period = this.props.period;
-        let iconURL = `http://openweathermap.org/img/wn/${period.weather[0].icon}@2x.png`;
-        return ( 
-        <div className="period">
-
-            <span className="period__d">{period.dt_txt}</span><br/>
-            <img src={iconURL} className="period__img" alt=""/>
-            <span className="period__temp">{period.main.temp}</span>
-            
-        </div>
-        );
-    }
-}
- 
 export default Period;
