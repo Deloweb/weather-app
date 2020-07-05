@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Period from "./Period";
-import "./Forecast.css";
+import Period from "../Period";
 
-class CurrentWeather extends Component {
+class Forecast extends Component {
   state = {
     periods: [],
     forecasts: [],
+    day: [],
   };
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class CurrentWeather extends Component {
   }
 
   fetchWeather = () => {
-    console.log(this.props.city);
+    // console.log(this.props.city);
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${this.props.city}&lang=fr&units=metric&appid=8c3a54c385c9c9d874d88f2cd6b3dda8`
@@ -37,18 +37,27 @@ class CurrentWeather extends Component {
           ),
         });
       });
-    };
-    
-    render() {
-    let test = this.state.forecasts[0];
+  };
+
+  render() {
     return (
-      <div className="weathersystem">
-        {this.state.forecasts.map((forecast, index) => (
-          <Period key={`forecast${index}`} forecast={forecast} />
-        ))}
+      <div className="weatherForecast">
+        <h2 className="has-text-centered title is-2 has-text-info">
+          {this.props.city}
+        </h2>
+        <div className="columns">
+          {this.state.forecasts.slice(0, 1).map((forecast, index) => (
+            <Period key={`forecast`} forecast={forecast} />
+          ))}
+        </div>
+        <div className="columns has-text-centered">
+          {this.state.forecasts.slice(1, 5).map((forecast, index) => (
+            <Period key={`forecast`} forecast={forecast} />
+          ))}
+        </div>
       </div>
     );
   }
 }
 
-export default CurrentWeather;
+export default Forecast;

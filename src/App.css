@@ -1,0 +1,26 @@
+.period {
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  align-items: center;
+  padding: 20px 10px;
+  margin: 10px;
+  background-color: cadetblue;
+  color: white;
+  font-weight: 600;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weatherForecast {
+  margin-top: 30px;
+}
+
+.App {
+  height: 100vh;
+}

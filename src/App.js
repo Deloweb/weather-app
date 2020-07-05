@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Forecast from "./Forecast.js";
+import CitySearch from "./CitySearch.js";
 
 function App() {
   return (
-    <div className="App">
-      <Forecast />
+    <div className="App has-background-link-light">
+      <CitySearch />
     </div>
   );
 }
