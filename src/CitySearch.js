@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Forecast from "./api/Forecast";
+import Forecast from "./components/Forecast";
 
 class CitySearch extends Component {
   state = {
